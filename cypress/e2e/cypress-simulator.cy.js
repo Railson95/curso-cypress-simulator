@@ -1,14 +1,12 @@
 describe("Testes para o App Cypress Simulator", () => {
   beforeEach("", () => {
-    cy.visit(
-      "https://cypress-simulator.s3.eu-central-1.amazonaws.com/index.html?skipCaptcha=true",
-      {
-        onBeforeLoad(win) {
-          win.localStorage.setItem("cookieConsent", "accepted");
-        },
-      }
-    );
-    cy.contains("button", "Login").click();
+    const skipCaptcha = true;
+    cy.login(skipCaptcha);
+    cy.visit(`./src/index.html?skipCaptcha=${skipCaptcha}`, {
+      onBeforeLoad(win) {
+        win.localStorage.setItem("cookieConsent", "accepted");
+      },
+    });
   });
 
   it('Digitar no "Cypress Code" um comando qualquer válido e verificar no "Cypress Output"', () => {
@@ -98,16 +96,13 @@ describe("Testes para o App Cypress Simulator", () => {
 
 describe("Testes para os cookies de consentimento", () => {
   beforeEach("", () => {
-    cy.visit(
-      "https://cypress-simulator.s3.eu-central-1.amazonaws.com/index.html?skipCaptcha=true",
-      {
-        onBeforeLoad(win) {
-          win.localStorage.removeItem("cookieConsent");
-        },
-      }
-    );
-
-    cy.contains("button", "Login").click();
+    const skipCaptcha = true;
+    cy.login(skipCaptcha);
+    cy.visit(`./src/index.html?skipCaptcha=${skipCaptcha}`, {
+      onBeforeLoad(win) {
+        win.localStorage.removeItem("cookieConsent");
+      },
+    });
   });
 
   it("Aceitar os cookies de consentimento", () => {
@@ -141,9 +136,7 @@ describe("Testes para os cookies de consentimento", () => {
 
 describe("Testes de captcha para o App Cypress Simulator", () => {
   beforeEach("", () => {
-    cy.visit(
-      "https://cypress-simulator.s3.eu-central-1.amazonaws.com/index.html"
-    );
+    cy.visit(`./src/index.html`);
     cy.contains("button", "Login").click();
   });
 

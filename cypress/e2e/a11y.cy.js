@@ -1,11 +1,12 @@
-describe("Cypress Simulator - A11y Checks", () => {
+describe.only("Cypress Simulator - A11y Checks", () => {
   beforeEach(() => {
-    cy.visit("./src/index.html?skipCaptcha=true", {
+    const skipCaptcha = true;
+    cy.login(skipCaptcha);
+    cy.visit(`./src/index.html?skipCaptcha=${skipCaptcha}`, {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted");
       },
     });
-    cy.contains("button", "Login").click();
     cy.injectAxe();
   });
 
