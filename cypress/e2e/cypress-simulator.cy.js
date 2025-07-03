@@ -10,24 +10,24 @@ describe("Testes para o App Cypress Simulator", () => {
   });
 
   it('Digitar no "Cypress Code" um comando qualquer válido e verificar no "Cypress Output"', () => {
-    cy.get("#codeInput").type("cy.visit(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.visit(url)";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Success");
   });
 
   it('Digitar no "Cypress Code" um comando qualquer inválido e verificar no "Cypress Output"', () => {
-    cy.get("#codeInput").type("cy.vi(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.vi(url)";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Error");
   });
 
   it('Digitar no "Cypress Code" o comando help e verificar os comandos no "Cypress Output" além do link oficial', () => {
-    cy.get("#codeInput").type("help");
-    cy.get("#runButton").click();
+    const cmd = "help";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Common Cypress commands and examples");
@@ -43,8 +43,8 @@ describe("Testes para o App Cypress Simulator", () => {
   });
 
   it('Verificar o Maximizar e Minimizar do "Cypress Output', () => {
-    cy.get("#codeInput").type("cy.visit(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.visit(url)";
+    cy.run(cmd);
 
     cy.get(".expand-collapse").click();
 
@@ -75,8 +75,8 @@ describe("Testes para o App Cypress Simulator", () => {
   });
 
   it("Verifica o estado transitório da aplicação", () => {
-    cy.get("#codeInput").type("cy.visit(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.visit(url)";
+    cy.run(cmd);
 
     cy.get("#runButton").should("contain", "Running...");
 

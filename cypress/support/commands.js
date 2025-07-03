@@ -16,3 +16,8 @@ Cypress.Commands.add("login", (skipCaptcha) => {
 
   cy.session("sessionId", setup, options);
 });
+
+Cypress.Commands.add("run", (cmd) => {
+  cy.get("#codeInput").type(cmd);
+  cy.contains("button", "Run").click();
+});

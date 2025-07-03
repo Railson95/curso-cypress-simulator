@@ -11,8 +11,8 @@ describe.only("Cypress Simulator - A11y Checks", () => {
   });
 
   it('Verificar a a11y ao inserir no "Cypress Code" um comando qualquer válido e verificar no "Cypress Output"', () => {
-    cy.get("#codeInput").type("cy.visit(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.visit(url)";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Success");
@@ -20,8 +20,8 @@ describe.only("Cypress Simulator - A11y Checks", () => {
   });
 
   it('Verificar a a11y ao inserir no "Cypress Code" um comando qualquer inválido e verificar no "Cypress Output"', () => {
-    cy.get("#codeInput").type("cy.vi(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.vi(url)";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Error");
@@ -29,8 +29,8 @@ describe.only("Cypress Simulator - A11y Checks", () => {
   });
 
   it('Verificar a a11y ao inserir "Cypress Code" o comando help e verificar os comandos no "Cypress Output" além do link oficial', () => {
-    cy.get("#codeInput").type("help");
-    cy.get("#runButton").click();
+    const cmd = "help";
+    cy.run(cmd);
     cy.get("#outputArea", { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Common Cypress commands and examples");
@@ -47,8 +47,8 @@ describe.only("Cypress Simulator - A11y Checks", () => {
   });
 
   it('Verificar a a11y quando selecionar o botão de Maximizar e Minimizar do "Cypress Output', () => {
-    cy.get("#codeInput").type("cy.visit(url)");
-    cy.get("#runButton").click();
+    const cmd = "cy.visit(url)";
+    cy.run(cmd);
 
     cy.get(".expand-collapse").click();
 
